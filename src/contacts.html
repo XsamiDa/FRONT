@@ -2,44 +2,54 @@
 <html lang="ru">
 
 <head>
-    ... <!-- Скопируйте весь блок <head> из index.html -->
-    <title>контакты</title>
-    <meta name="description" content="наши контакты">
+    <meta charset="UTF-8">
     <link rel="stylesheet" href="styles.css">
-    <script src="main.js" defer></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="../assets/favicon.ico" type="image/x-icon">
+    <title>Контакты</title>
+    <meta name="description" content="Контакты">
 </head>
 
 <body>
-    <header>
-        <a href="/">Логотип или название сайта</a>
-        <!-- Главное меню навигации -->
-        <nav>
-            <ul>
-                <li><a href="index.html">Главная</a></li>
-                <li><a href="about.html">О нас</a></li>
-                <li><a href="contacts.html">Контакты</a></li>
+
+    <header class="site-header">
+        <a class="site-header__brand" href="">Крутой сайт</a>
+        <nav class="site-nav" aria-label="Основная навигация">
+            <ul class="site-nav__list">
+                <li class="site-nav__item"><a class="site-nav__link inActivePage" href="index.html">Главная</a></li>
+                <li class="site-nav__item"><a class="site-nav__link inActivePage" href="about.html">О нас</a></li>
+                <li class="site-nav__item "><a class="site-nav__link site-nav__link--cta activePage" href="#contacts">Связаться</a></li>
             </ul>
         </nav>
+        <button class="theme-toggle" type="button" aria-pressed="false">Тема</button>
+        <script defer>
+            const KEY = 'theme', btn = document.querySelector('.theme-toggle');
+            const prefersDark = matchMedia('(prefers-color-scheme: dark)').matches;
+            // Автовыбор: системная тема или сохранённый выбор пользователя
+            if (localStorage.getItem(KEY) === 'dark' || (!localStorage.getItem(KEY) &&
+                prefersDark)) {
+                document.body.classList.add('theme-dark');
+                btn?.setAttribute('aria-pressed', 'true');
+            }
+            // Переключение по кнопке с сохранением в localStorage
+            btn?.addEventListener('click', () => {
+                const isDark = document.body.classList.toggle('theme-dark');
+                btn.setAttribute('aria-pressed', String(isDark));
+                localStorage.setItem(KEY, isDark ? 'dark' : 'light');
+            });
+        </script>
     </header>
+
 
     <main>
         <!-- Простые "хлебные крошки" -->
         <nav aria-label="Хлебные крошки">
             <a href="index.html">Главная</a> →
-            <span>контакты</span>
+            <span>О нас</span>
         </nav>
 
-        <h1>Наши контакты</h1>
-        <section>
-            <h2>номер</h2>
-            <p>Текст о том, как все начиналось...</p>
-        </section>
-        <section>
-            <h2>Наша команда</h2>
-            <p>Текст о команде...</p>
-        </section>
+        <h1>связь</h1>
 
-        <!-- Кнопка открытия модалки -->
         <button id="openDialog" type="button">Написать нам</button>
         <!-- Модалка с формой -->
         <dialog id="contactDialog" aria-labelledby="dialogTitle">
@@ -73,9 +83,12 @@
     </main>
 
     <footer>
-        <p>&copy;крутой сайт. Все права защищены.</p>
+        <p>&copy; 2025 Крутой сайт. Все права защищены.</p>
         <p>Телефон: +7 (123) 456-78-90</p>
+        <!-- Кнопка открытия модалки -->
+
     </footer>
+    <script src="main.js" defer></script>
 </body>
 
 </html>

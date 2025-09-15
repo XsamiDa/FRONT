@@ -1,57 +1,89 @@
 <!DOCTYPE html>
 <html lang="ru">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Главная - Крутой сайт</title>
+    <title>Главная - Название вашего сайта</title>
     <meta name="description" content="Краткое описание главной страницы вашего сайта">
-    <link rel="icon" href="assets/favicon.ico" type="image/x-icon">
+    <link rel="icon" href="../assets/favicon.ico" type="image/x-icon">
     <link rel="stylesheet" href="styles.css">
-    <script src="main.js" defer></script>
 </head>
+
 <body>
-    <!-- Шапка сайта -->
     <header>
-        <a href="/">Крутой сайт</a>
-        <!-- Главное меню навигации -->
-        <nav>
-            <ul>
-                <li><a href="index.html">Главная</a></li>
-                <li><a href="about.html">О нас</a></li>
-                <li><a href="contacts.html">Контакты</a></li>
+        <a class="site-header__brand" href="">Крутой сайт</a>
+        <nav class="site-nav" aria-label="Основная навигация">
+            <ul class="site-nav__list">
+                <li class="site-nav__item"><a class="site-nav__link activePage" href="index.html">Главная</a></li>
+                <li class="site-nav__item"><a class="site-nav__link inActivePage" href="about.html">О нас</a></li>
+                <li class="site-nav__item"><a class="site-nav__link inActivePage" href="contacts.html">Связаться</a>
+                </li>
             </ul>
         </nav>
+        <button class="theme-toggle" type="button" aria-pressed="false">Тема</button>
+        <script defer>
+            const KEY = 'theme', btn = document.querySelector('.theme-toggle');
+            const prefersDark = matchMedia('(prefers-color-scheme: dark)').matches;
+            // Автовыбор: системная тема или сохранённый выбор пользователя
+            if (localStorage.getItem(KEY) === 'dark' || (!localStorage.getItem(KEY) &&
+                prefersDark)) {
+                document.body.classList.add('theme-dark');
+                btn?.setAttribute('aria-pressed', 'true');
+            }
+            // Переключение по кнопке с сохранением в localStorage
+            btn?.addEventListener('click', () => {
+                const isDark = document.body.classList.toggle('theme-dark');
+                btn.setAttribute('aria-pressed', String(isDark));
+                localStorage.setItem(KEY, isDark ? 'dark' : 'light');
+            });
+        </script>
     </header>
 
-    <!-- Уникальное основное содержимое страницы -->
     <main>
         <h1>Добро пожаловать на наш сайт!</h1>
+
+        <iframe width="720" height="405" src="https://rutube.ru/play/embed/454045f46c552162b86032293ddeb6d6"
+            style="border: none;" allow="clipboard-write; autoplay" allowFullScreen></iframe>
+
+
+        <!-- width/height уменьшают «скачок» макета (CLS); alt обязателен -->
+        <img src="https://avatars.mds.yandex.net/i?id=9e83b867950d9907f9c9f73533bcec9e_l-9290726-images-thumbs&n=13"
+            alt="Проект: макет мобильного приложения" width="640" height="360" loading="lazy" decoding="async">
+
 
         <!-- Секция 1 с якорем -->
         <section id="services">
             <h2>Наши услуги</h2>
-            <p>пока ничо не придумал потом через ии напишу</p>
+            <p>Описание предоставляемых услуг Lorem ipsum dolor sit, amet consectetur adipisicing elit. Totam
+                praesentium optio sint asperiores voluptatibus voluptate nostrum, assumenda sapiente expedita adipisci
+                quisquam obcaecati dolore fugit qui eius cumque commodi voluptatum rerum.</p>
             <a href="#contacts">Связаться с нами</a> <!-- Якорная ссылка внутри страницы -->
         </section>
 
         <!-- Секция 2 с якорем -->
         <section id="portfolio">
             <h2>Портфолио</h2>
-            <p>Примеры наших работ... </p>
+            <p>Примеры наших работ Lorem ipsum dolor sit amet consectetur adipisicing elit. Quos adipisci quas, natus
+                numquam consectetur vel perferendis consequuntur quasi laudantium? Vero eveniet modi vel amet eos maxime
+                numquam vitae labore aliquam.</p>
         </section>
 
         <!-- Секция 3 с якорем -->
         <section id="contacts">
             <h2>Контактная информация</h2>
-            <p>Наши контакты...</p>
+            <p>Наши контакты Lorem ipsum dolor sit amet consectetur, adipisicing elit. Adipisci quam laudantium soluta
+                sint, vitae corrupti aspernatur sunt facilis iusto eum, molestiae error ratione sequi neque aut odio?
+                Odit, illum corrupti.</p>
             <a href="contacts.html">Подробнее</a> <!-- Ссылка на отдельную страницу -->
         </section>
     </main>
 
     <!-- Подвал сайта -->
     <footer>
-        <p>&copy;крутой сайт. Все права защищены.</p>
+        <p>&copy; 2025 Крутой сайт. Все права защищены.</p>
         <p>Телефон: +7 (123) 456-78-90</p>
     </footer>
 </body>
+
 </html>

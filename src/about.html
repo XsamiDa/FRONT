@@ -1,23 +1,43 @@
 <!DOCTYPE html>
 <html lang="ru">
+
 <head>
-    ... <!-- Скопируйте весь блок <head> из index.html -->
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="styles.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="../assets/favicon.ico" type="image/x-icon">
     <title>О нас - Название вашего сайта</title>
     <meta name="description" content="Узнайте больше о нашей компании и истории">
-    <link rel="stylesheet" href="styles.css">
-    <script src="main.js" defer></script>
 </head>
+
 <body>
     <header>
-         <a href="/">Логотип или название сайта</a>
-        <!-- Главное меню навигации -->
-        <nav>
-            <ul>
-                <li><a href="index.html">Главная</a></li>
-                <li><a href="about.html">О нас</a></li>
-                <li><a href="contacts.html">Контакты</a></li>
+        <a class="site-header__brand" href="">Крутой сайт</a>
+        <nav class="site-nav" aria-label="Основная навигация">
+            <ul class="site-nav__list">
+                <li class="site-nav__item"><a class="site-nav__link inActivePage" href="index.html">Главная</a></li>
+                <li class="site-nav__item"><a class="site-nav__link activePage" href="about.html">О нас</a></li>
+                <li class="site-nav__item"><a class="site-nav__link inActivePage" href="contacts.html">Связаться</a>
+                </li>
             </ul>
         </nav>
+        <button class="theme-toggle" type="button" aria-pressed="false">Тема</button>
+        <script defer>
+            const KEY = 'theme', btn = document.querySelector('.theme-toggle');
+            const prefersDark = matchMedia('(prefers-color-scheme: dark)').matches;
+            // Автовыбор: системная тема или сохранённый выбор пользователя
+            if (localStorage.getItem(KEY) === 'dark' || (!localStorage.getItem(KEY) &&
+                prefersDark)) {
+                document.body.classList.add('theme-dark');
+                btn?.setAttribute('aria-pressed', 'true');
+            }
+            // Переключение по кнопке с сохранением в localStorage
+            btn?.addEventListener('click', () => {
+                const isDark = document.body.classList.toggle('theme-dark');
+                btn.setAttribute('aria-pressed', String(isDark));
+                localStorage.setItem(KEY, isDark ? 'dark' : 'light');
+            });
+        </script>
     </header>
 
     <main>
@@ -30,17 +50,28 @@
         <h1>О нашей компании</h1>
         <section>
             <h2>Наша история</h2>
-            <p>Текст о том, как все начиналось...</p>
+            <p>«Крутой Проект» начался в 2023 году с небольшой группы энтузиастов, стремившихся создать инновационное
+                решение для автоматизации повседневных задач. Идея быстро развивалась, и уже через год проект привлек
+                внимание инвесторов. Сегодня «Крутой Проект» активно внедряется в разных сферах, помогая миллионам
+                пользователей повышать продуктивность и упрощать жизнь.</p>
         </section>
         <section>
             <h2>Наша команда</h2>
-            <p>Текст о команде...</p>
+            <p>В проекте «Крутой Проект» участвуют три ключевых человека:
+
+                - Крутой Чел 1 — основатель и технический директор, отвечает за разработку и архитектуру продукта.
+                - Крутая Чувиха 52 — руководитель маркетинга, занимается продвижением и связями с общественностью.
+                - Крутой Крутич 68 — главный дизайнер, создает интуитивно понятный и современный интерфейс.
+
+                Все участники объединены общей целью — сделать жизнь пользователей проще и удобнее благодаря
+                инновационным технологиям.</p>
         </section>
     </main>
 
     <footer>
-           <p>&copy;крутой сайт. Все права защищены.</p>
-           <p>Телефон: +7 (123) 456-78-90</p>
+        <p>&copy; 2025 Крутой сайт. Все права защищены.</p>
+        <p>Телефон: +7 (123) 456-78-90</p>
     </footer>
 </body>
+
 </html>
