@@ -41,8 +41,10 @@ input,
 select,
 textarea,
 button {
-    height: 50px;
-    width: 50%;
+    height: 40px;
+    width: 100%;
+    max-width: 480px;
+    padding: .5rem .75rem;
     border: 1px solid #c8c8c8;
     border-radius: 8px;
     background: #fff;
